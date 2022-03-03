@@ -6045,7 +6045,7 @@ function draw_grid (path, coords) {
 d3.select("#maparea").append("path")
 .attr("id","mapline")
 .attr("stroke", "black")
-.attr("stroke-width", "2px")
+.attr("stroke-width", "1px")
 .attr("stroke-linecap", "round")
 .attr("fill","none")
 .attr("d",draw_grid(d3.path(),grid_coords).toString());
@@ -6074,7 +6074,7 @@ d3.select("#maparea")
 .enter()
 .append("rect")
 .attr("class","pump")
-.attr("fill","red")
+.attr("fill","#d95f02")
 .attr("x",function(d) {return (d[0]*grid_factor)-(rect_width/2)})
 .attr("y",function(d) {return (d[1]*grid_factor)-(rect_width/2)})
 .attr("width", rect_width+"px")
@@ -6670,21 +6670,61 @@ d3.select("g")
 .attr("r",`${r}px`)
 .attr("stroke", "none")
 .attr("fill", function(d){
-  return d[3]==1 ? "pink" : "blue";
+  return d[3]==1 ? "#7570b3" : "#1b9e77";
 })
+
+
+.on("mouseover", function(d){
+  console.log("circle on mouseover")
+d3.select(this)
+.attr("fill", "black")
+d3.select("#maparea")
+.append("text")
+.attr("id","data-age", "data-sex")
+.attr("x", d.x )
+.attr("y", d.y )
+.html(d.dead)
+})
+.on("mouseout", function(d){
+  console.log("circle on mouseout")
+
+d3.select(this)
+.attr("fill", function(d) {
+    return d.color;
+})
+})
+;
+
+
+
+
+
+
+
 //.attr("opacity",opacity);
 
 //workhouse at 510,243
-//brewhouse at 592,180
+
 d3.select("g")
 .append("rect")
-.attr("class", "brewhouse")
+.attr("class", "workhouse")
 .attr("fill", "black")
 .attr("stroke", "none")
 .attr("x", 265)
 .attr("y", 320)
 .attr("width", `${20}px`)
 .attr("height", `${20}px`)
+
+//brewhouse at 592,180
+d3.select("g")
+.append("circle")
+.attr("class", "brewhouse")
+.attr("fill", "black")
+.attr("stroke", "none")
+.attr("cx", 345)
+.attr("cy", 300)
+.attr("r", `${7}px`)
+
 
 
 d3.select("#maparea").attr("transform","scale(-1,1) rotate (180,0,0)")

@@ -9,16 +9,123 @@
     <svg id="deathchart" width="1000" height="600"></svg>
 
 <div>
-
+  <script type="text/javascript" src="d3.js"></script>
     <svg id="maparea" width="600" height="700"></svg>
-    <script type="text/javascript" src="d3.js"></script>
+
     <script type="text/javascript" src="map.js"> </script>
 
-    <script type="text/javascript" src="deathchart.js"> </script>
+
+
+<svg id= "MapKey" width="400" height="400">
+
+
+     <text x="200" y="50" style="font-size: 20px"> Map Key </text>
+
+      <rect x="200" y="60" width="8" height="8" fill="#d95f02"> </rect>
+      <text x="220" y="70" style="font-size: 15px"> Water Pumps </text>
+
+      <circle cx="205" cy="85" r = "5" fill="#1b9e77"> </circle>
+      <text x="220" y="90" style="font-size: 15px"> Death of Male person </text>
+
+      <circle cx="205" cy="105" r = "5" fill="#7570b3"> </circle>
+      <text x="220" y="110" style="font-size: 15px"> Death of Female Person </text>
+
+      <rect x="200" y="120" width="8" height="8" fill= "black"> </rect>
+      <text x="220" y="130" style="font-size: 15px"> Work House </text>
+
+     <circle cx="205" cy="145" r = "5" fill="black"> </circle>
+      <text x="220" y="150" style="font-size: 15px"> Brewery </text>
+
+
+</svg>
+
+   <script type="text/javascript" src="deathchart.js"> </script>
+
+</script>
 
 <div>
 
-  
+
+  <svg id="SexAge" width="400" height="300">
+
+  <rect id="0-10Male" x="50" y="50" width="20" fill="#1b9e77"> </rect>
+  <rect id="0-10Female" x="70" y="50" width="20" fill="#7570b3"> </rect>
+  <rect id="11-20Male" x="95" y="50" width="20" fill="#1b9e77"> </rect>
+  <rect id="11-20Female" x="115" y="50" width="20" fill="#7570b3"> </rect>
+  <rect id="21-40Male" x="140" y="50" width="20" fill="#1b9e77"> </rect>
+  <rect id="21-40Female" x="160" y="50" width="20" fill="#7570b3"> </rect>
+  <rect id="41-60Male" x="185" y="50" width="20" fill="#1b9e77"> </rect>
+  <rect id="41-60Female" x="205" y="50" width="20" fill="#7570b3"> </rect>
+  <rect id="61-80Male" x="230" y="50" width="20" fill="#1b9e77"> </rect>
+  <rect id="61-80Female" x="250" y="50" width="20" fill="#7570b3"> </rect>
+  <rect id="80+Male" x="275" y="50" width="20" fill="#1b9e77"> </rect>
+  <rect id="80+Female" x="295" y="50" width="20" fill="#7570b3"> </rect>
+
+  <line x1="40" x2="350" y1="152" y2="152" stroke="black"> </line>
+  <line x1="40" x2="40" y1="50" y2="152" stroke="black"> </line>
+
+  <text x="50" y="170" style="font-size: 15px"> 0-10 </text>
+  <text x="95" y="170" style="font-size: 15px"> 11-20 </text>
+  <text x="140" y="170" style="font-size: 15px"> 21-40 </text>
+  <text x="185" y="170" style="font-size: 15px"> 41-60 </text>
+  <text x="230" y="170" style="font-size: 15px"> 61-80 </text>
+  <text x="275" y="170" style="font-size: 15px"> 80+ </text>
+
+<script>
+  function myFunction () {
+    console.log("sex and age");
+  }
+
+  var age = [ 65, 78, 29, 19, 34, 24, 22, 35, 46, 45, 88, 86];
+
+d3.select("#SexAge")
+  .selectAll('rect')
+  .data(age)
+  .attr('height', function(d) {return d;})
+  .attr('y', function(d) {return 102 - d + 50;})
+
+  .on("mouseover", function(d){
+    console.log("rectangle on mouseover")
+  d3.select(this)
+  .attr("opacity", ".8")
+  d3.select("#SexAge")
+  .append("text")
+  .attr("id","dead")
+  .attr("x", "200" )
+  .attr("y", "300" )
+  .html(d.age)
+  })
+  .on("mouseout", function(d){
+    console.log("rectangle on mouseout")
+
+  d3.select("#dead")
+  .remove()
+  d3.select(this)
+  .attr("opacity", "1")
+  })
+  ;
+
+
+
+;
+
+
+
+
+
+  </script>
+
+  /*  var SexData = [
+          {AgeRange:'0-10', Sex:{Male:65, Female:78}},
+          {AgeRange:'11-20', Sex:{Male:29, Female:19}},
+          {AgeRange:'21-40', Sex:{Male:34, Female:24}},
+          {AgeRange:'41-60', Sex:{Male:22, Female:35}},
+          {AgeRange:'61-80', Sex:{Male:46, Female:45}},
+          {AgeRange:'80+', Sex:{Male:88, Female:86}},
+*/
+
+
+
 
     </body>
 </html>

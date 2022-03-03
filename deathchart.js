@@ -18,7 +18,9 @@ function main (){
                   .range ([height-margin, 0]);
 
       g.append ("g").attr('transform', 'translate(0, '+(height-margin)+')')
-        .call(d3.axisBottom(xScale))
+        .call(d3.axisBottom(xScale)
+      );
+
 
       g.append('g')
        .call(d3.axisLeft(yScale)
@@ -36,7 +38,28 @@ function main (){
                 .attr("y", function(d){return ((height-margin) - d.deaths*((height - margin)/150));})
                 .attr("width", xScale.bandwidth())
                 .attr("height",function(d){return d.deaths * (height - margin)/150;})
-                .attr("fill", "steelblue");
+                .attr("fill", "steelblue")
+
+                .on("mouseover", function(e,d){
+                  console.log("rectangle on mouseover")
+                d3.select(this)
+                .attr("opacity", ".8")
+                d3.select("#deathchart")
+                .append("text")
+                .attr("id","deathnumber")
+                .attr("x", e.x )
+                .attr("y", e.y )
+                .html(d.deaths)
+                })
+                .on("mouseout", function(d){
+                  console.log("rectangle on mouseout")
+
+                d3.select("#deathnumber")
+                .remove()
+                d3.select(this)
+                .attr("opacity", "1")
+                })
+                ;
 
 
               })
