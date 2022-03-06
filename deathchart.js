@@ -50,7 +50,6 @@ function main (){
                 .attr("x", d3.select(this).attr("x"))
                 .attr("y", 50)
                 .html(d.deaths)
-                })
                 .on("mouseout", function(d){
                   console.log("rectangle on mouseout")
 
@@ -63,4 +62,4 @@ function main (){
 
 
               })
-            };
+            }
