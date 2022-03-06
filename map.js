@@ -6674,25 +6674,6 @@ d3.select("g")
 })
 
 
-.on("mouseover", function(d){
-  console.log("circle on mouseover")
-d3.select(this)
-.attr("fill", "black")
-d3.select("#maparea")
-.append("text")
-.attr("id","data-age", "data-sex")
-.attr("x", d.x )
-.attr("y", d.y )
-.html(d.dead)
-})
-.on("mouseout", function(d){
-  console.log("circle on mouseout")
-
-d3.select(this)
-.attr("fill", function(d) {
-    return d.color;
-})
-})
 ;
 
 
