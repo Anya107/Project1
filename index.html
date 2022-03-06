@@ -6,38 +6,113 @@
     </head>
     <body onload="main()">
 
-    <svg id="deathchart" width="1000" height="600"></svg>
-
-<div>
-  <script type="text/javascript" src="d3.js"></script>
-    <svg id="maparea" width="600" height="700"></svg>
-
-    <script type="text/javascript" src="map.js"> </script>
+    <div style="padding: 20px; font-size: 25px">  <strong>John Snow's Cholera Map</strong> </div>
 
 
+    <script type="text/javascript" src="d3.js"></script>
 
-<svg id= "MapKey" width="400" height="400">
+    <div style="padding-left: 100px">    <text style="font-size: 20px"> London </text> </div>
 
+        <svg id="maparea" width="600" height="500">
+        </svg>
 
-     <text x="200" y="50" style="font-size: 20px"> Map Key </text>
-
-      <rect x="200" y="60" width="8" height="8" fill="#d95f02"> </rect>
-      <text x="220" y="70" style="font-size: 15px"> Water Pumps </text>
-
-      <circle cx="205" cy="85" r = "5" fill="#1b9e77"> </circle>
-      <text x="220" y="90" style="font-size: 15px"> Death of Male person </text>
-
-      <circle cx="205" cy="105" r = "5" fill="#7570b3"> </circle>
-      <text x="220" y="110" style="font-size: 15px"> Death of Female Person </text>
-
-      <rect x="200" y="120" width="8" height="8" fill= "black"> </rect>
-      <text x="220" y="130" style="font-size: 15px"> Work House </text>
-
-     <circle cx="205" cy="145" r = "5" fill="black"> </circle>
-      <text x="220" y="150" style="font-size: 15px"> Brewery </text>
+        <script type="text/javascript" src="map.js"> </script>
 
 
-</svg>
+
+    <svg id= "MapKey" width="200" height="500">
+
+
+         <text x="10" y="50" style="font-size: 20px"> Map Key </text>
+
+          <rect x="0" y="60" width="8" height="8" fill="#d95f02"> </rect>
+          <text x="20" y="70" style="font-size: 15px"> Water Pumps </text>
+
+          <circle cx="5" cy="85" r = "5" fill="#1b9e77"> </circle>
+          <text x="20" y="90" style="font-size: 15px"> Death of Male person </text>
+
+          <circle cx="5" cy="105" r = "5" fill="#7570b3"> </circle>
+          <text x="20" y="110" style="font-size: 15px"> Death of Female Person </text>
+
+          <rect x="0" y="120" width="8" height="8" fill= "black"> </rect>
+          <text x="20" y="130" style="font-size: 15px"> Work House </text>
+
+         <circle cx="5" cy="145" r = "5" fill="black"> </circle>
+          <text x="20" y="150" style="font-size: 15px"> Brewery </text>
+
+
+    </svg>
+
+    <svg id="deathchart" width="1000" height="600">
+   <text x="50" y="20" style="font-size: 20px"> Deaths Per Day </text>
+  </svg>
+
+
+    <svg id="SexAge" width="400" height="300">
+     <text x="50" y="20" style="font-size: 20px"> Deaths By Sex And Age </text>
+
+    <rect id="0-10Male" x="50" y="50" width="20" fill="#1b9e77"> </rect>
+    <rect id="0-10Female" x="70" y="50" width="20" fill="#7570b3"> </rect>
+    <rect id="11-20Male" x="95" y="50" width="20" fill="#1b9e77"> </rect>
+    <rect id="11-20Female" x="115" y="50" width="20" fill="#7570b3"> </rect>
+    <rect id="21-40Male" x="140" y="50" width="20" fill="#1b9e77"> </rect>
+    <rect id="21-40Female" x="160" y="50" width="20" fill="#7570b3"> </rect>
+    <rect id="41-60Male" x="185" y="50" width="20" fill="#1b9e77"> </rect>
+    <rect id="41-60Female" x="205" y="50" width="20" fill="#7570b3"> </rect>
+    <rect id="61-80Male" x="230" y="50" width="20" fill="#1b9e77"> </rect>
+    <rect id="61-80Female" x="250" y="50" width="20" fill="#7570b3"> </rect>
+    <rect id="80+Male" x="275" y="50" width="20" fill="#1b9e77"> </rect>
+    <rect id="80+Female" x="295" y="50" width="20" fill="#7570b3"> </rect>
+
+    <line x1="40" x2="350" y1="152" y2="152" stroke="black"> </line>
+    <line x1="40" x2="40" y1="50" y2="152" stroke="black"> </line>
+
+    <text x="50" y="170" style="font-size: 15px"> 0-10 </text>
+    <text x="95" y="170" style="font-size: 15px"> 11-20 </text>
+    <text x="140" y="170" style="font-size: 15px"> 21-40 </text>
+    <text x="185" y="170" style="font-size: 15px"> 41-60 </text>
+    <text x="230" y="170" style="font-size: 15px"> 61-80 </text>
+    <text x="275" y="170" style="font-size: 15px"> 80+ </text></svg>
+
+  <script>
+    function myFunction () {
+      console.log("sex and age");
+    }
+
+    var age = [ 65, 78, 29, 19, 34, 24, 22, 35, 46, 45, 88, 86];
+
+    d3.select("#SexAge")
+      .selectAll('rect')
+      .data(age)
+      .attr('height', function(d) {return d;})
+      .attr('y', function(d) {return 102 - d + 50;})
+      .on("mouseover", function(d,i){
+      d3.select(this)
+      .attr("opacity", ".8");
+      console.log(i);
+      d3.select("#SexAge")
+      .append("text")
+      .attr('class', 'textvalue')
+      .attr('x', d3.select(this).attr("x"))
+      .attr('y', 50)
+      .html(i)
+      })
+      .on("mouseout", function(d){
+        console.log("rectangle on mouseout")
+        d3.selectAll('text.textvalue').remove();
+      d3.select("#dead")
+      .remove()
+      d3.select(this)
+      .attr("opacity", "1")
+      })
+      ;
+
+
+  ;
+
+
+    </script>
+
 
    <script type="text/javascript" src="deathchart.js"> </script>
 
@@ -45,84 +120,18 @@
 
 <div>
 
+<p style="width: 800px;">
 
-  <svg id="SexAge" width="400" height="300">
+  For my design, I wanted to keep my visualization as simple as possible, because it communicates so much information. I decided to put the charts next to each other and below the map. I thought that the map was the first thing people should see when coming to this page, then when they scrolled down, they could digest the information a little further through the graphs. I used Color Brewer to select colors that would be distinguishable on the map even if the viewer was colorblind. Of my color options, I chose the brightest one for the pumps, so that they would stand out against the dots that represented dead people. I also used shape to distinguish them.
+</p>
 
-  <rect id="0-10Male" x="50" y="50" width="20" fill="#1b9e77"> </rect>
-  <rect id="0-10Female" x="70" y="50" width="20" fill="#7570b3"> </rect>
-  <rect id="11-20Male" x="95" y="50" width="20" fill="#1b9e77"> </rect>
-  <rect id="11-20Female" x="115" y="50" width="20" fill="#7570b3"> </rect>
-  <rect id="21-40Male" x="140" y="50" width="20" fill="#1b9e77"> </rect>
-  <rect id="21-40Female" x="160" y="50" width="20" fill="#7570b3"> </rect>
-  <rect id="41-60Male" x="185" y="50" width="20" fill="#1b9e77"> </rect>
-  <rect id="41-60Female" x="205" y="50" width="20" fill="#7570b3"> </rect>
-  <rect id="61-80Male" x="230" y="50" width="20" fill="#1b9e77"> </rect>
-  <rect id="61-80Female" x="250" y="50" width="20" fill="#7570b3"> </rect>
-  <rect id="80+Male" x="275" y="50" width="20" fill="#1b9e77"> </rect>
-  <rect id="80+Female" x="295" y="50" width="20" fill="#7570b3"> </rect>
+<p style="width: 800px;">
 
-  <line x1="40" x2="350" y1="152" y2="152" stroke="black"> </line>
-  <line x1="40" x2="40" y1="50" y2="152" stroke="black"> </line>
-
-  <text x="50" y="170" style="font-size: 15px"> 0-10 </text>
-  <text x="95" y="170" style="font-size: 15px"> 11-20 </text>
-  <text x="140" y="170" style="font-size: 15px"> 21-40 </text>
-  <text x="185" y="170" style="font-size: 15px"> 41-60 </text>
-  <text x="230" y="170" style="font-size: 15px"> 61-80 </text>
-  <text x="275" y="170" style="font-size: 15px"> 80+ </text>
-
-<script>
-  function myFunction () {
-    console.log("sex and age");
-  }
-
-  var age = [ 65, 78, 29, 19, 34, 24, 22, 35, 46, 45, 88, 86];
-
-d3.select("#SexAge")
-  .selectAll('rect')
-  .data(age)
-  .attr('height', function(d) {return d;})
-  .attr('y', function(d) {return 102 - d + 50;})
-
-  .on("mouseover", function(d){
-    console.log("rectangle on mouseover")
-  d3.select(this)
-  .attr("opacity", ".8")
-  d3.select("#SexAge")
-  .append("text")
-  .attr("id","dead")
-  .attr("x", "200" )
-  .attr("y", "300" )
-  .html(d.age)
-  })
-  .on("mouseout", function(d){
-    console.log("rectangle on mouseout")
-
-  d3.select("#dead")
-  .remove()
-  d3.select(this)
-  .attr("opacity", "1")
-  })
-  ;
+  With this data, John Snow was able to establish a link between contaminated water and cholera, mapping the deaths and using that data to determine the contaminated pump. During this process, I did come across some insight and speculation. I was curious as to why there is such a significant spike in deaths on September 1 and 2, but was unable to determine a hypothesis for this. Another thing I noticed is that in the 11-40 age groups, there are significantly more male deaths than female. I wonder if this is due to this age group of men being more likely to be exposed at the work house or brewery, which were both close to the contaminated pump.
 
 
 
-;
-
-
-
-
-
-  </script>
-
-  /*  var SexData = [
-          {AgeRange:'0-10', Sex:{Male:65, Female:78}},
-          {AgeRange:'11-20', Sex:{Male:29, Female:19}},
-          {AgeRange:'21-40', Sex:{Male:34, Female:24}},
-          {AgeRange:'41-60', Sex:{Male:22, Female:35}},
-          {AgeRange:'61-80', Sex:{Male:46, Female:45}},
-          {AgeRange:'80+', Sex:{Male:88, Female:86}},
-*/
+</p>
 
 
 
