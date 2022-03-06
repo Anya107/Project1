@@ -7,7 +7,7 @@ function main (){
 
   var g = svg.append("g").attr("transform", "translate(100,50)")
 
-  d3.csv("data/deathdays.csv").then(function(data){
+  d3.csv("Data/deathdays.csv").then(function(data){
 
     var xScale = d3.scaleBand()
                     .domain(data.map(function(d) { return d.date;} ))
