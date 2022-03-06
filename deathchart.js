@@ -40,7 +40,7 @@ function main (){
                 .attr("height",function(d){return d.deaths * (height - margin)/150;})
                 .attr("fill", "steelblue")
 
-                .on("mouseover", function(e,d){
+             .on("mouseover", function(e,d){
                   console.log("rectangle on mouseover")
                 d3.select(this)
                 .attr("opacity", ".8")
@@ -50,6 +50,7 @@ function main (){
                 .attr("x", d3.select(this).attr("x"))
                 .attr("y", 50)
                 .html(d.deaths)
+                })
                 .on("mouseout", function(d){
                   console.log("rectangle on mouseout")
 
@@ -59,7 +60,6 @@ function main (){
                 .attr("opacity", "1")
                 })
                 ;
-
 
               })
             }
